@@ -1,0 +1,47 @@
+.li {
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #898989;
+}
+
+.title,
+.titles {
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 33px;
+  color: #19202C;
+}
+
+/* .title::before {
+  content: '';
+  width: 50px;
+  height: 50px;
+  background-position: center center;
+  display: inline-block;
+  background-image: url(../coponents/img/girl.svg);
+  background-repeat: no-repeat;
+} */
+
+.titls {
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 33px;
+  color: #19202C;
+}
+
+/* .titls::before {
+  content: '';
+  width: 50px;
+  height: 50px;
+  background-position: center center;
+  display: inline-block;
+  background-image: url(../coponents/img/Oval.svg);
+  background-repeat: no-repeat;
+} */
