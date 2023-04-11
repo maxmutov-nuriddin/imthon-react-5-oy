@@ -1,15 +1,22 @@
 import { useContext, useState } from "react";
 import { FetchContext } from "../context/Context";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import SearchBar from "./exap";
+import 'swiper/css';
+
 
 const Search = () => {
   const { data } = useContext(FetchContext);
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = (query) => {
-    const results = data.filter((item) =>
-      item.video.title.toLowerCase().includes(query.toLowerCase())
-    );
+    const results = data.filter((item) => {
+      if (handleSearch === '') {
+        return value;
+      } else if (item.video.title.toLowerCase().includes(query.toLowerCase())) {
+        return item
+      }
+    });
     setSearchResults(results);
   };
 
@@ -28,7 +35,6 @@ const Search = () => {
         </div>
       ) : (
         <div>
-          
         </div>
       )}
     </div>
