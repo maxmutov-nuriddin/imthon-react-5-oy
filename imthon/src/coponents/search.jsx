@@ -3,6 +3,8 @@ import { FetchContext } from "../context/Context";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SearchBar from "./exap";
 import 'swiper/css';
+import { Link } from "react-router-dom";
+
 
 
 const Search = () => {
@@ -27,12 +29,15 @@ const Search = () => {
         <div>
           <h2>Search Results:</h2>
           {searchResults.map((item) => (
-            <div key={item.video.videoId}>
-              <h3>{item.video.title}</h3>
-              <img src={item.video.thumbnails[0].url} alt={item.video.title} />
-            </div>
+            <Link to={`/card/${item.video.videoId}`}>
+              <div key={item.video.videoId}>
+                <h3>{item.video.title}</h3>
+                <img src={item.video.thumbnails[0].url} alt={item.video.title} />
+              </div>
+            </Link>
           ))}
         </div>
+
       ) : (
         <div>
         </div>

@@ -19,6 +19,7 @@ import { CiMusicNote1 } from 'react-icons/ci';
 import { CgGames } from 'react-icons/cg';
 import { MdOutlineExpandMore } from 'react-icons/md';
 
+
 import "./examp.css"
 import 'swiper/css';
 
@@ -28,6 +29,8 @@ import { FetchContext } from "../context/Context";
 import { useState } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+// import Video from './card';
 
 
 const NavScrollExample = ({ onSearch }) => {
