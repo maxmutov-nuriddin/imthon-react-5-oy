@@ -67,7 +67,7 @@
 }
 
 
-.ful{
+.ful {
   background-repeat: no-repeat;
   width: 26px;
   height: 26px;
@@ -100,5 +100,76 @@
 
 .man {
   background-image: url('../coponents/img/man.svg');
+
+}
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+}
+
+.tofix {
+  position: fixed;
+  top: 80px;
+  left: 10px;
+}
+
+.pos {
+  position: relative;
+  left: 200px;
+  top: 60px;
+}
+
+.totop {
+  position: fixed;
+  top: 0;
+  width: 95vw;
+  align-items: center;
+  background: #fff;
+  z-index: 100;
+}
+
+.list__item {
+  padding: 20px 0;
+  position: fixed;
+  background-color: #fff;
+  z-index: 100;
+  left: 0;
+  bottom: -50px;
+  width: 100%;
+}
+
+/* .footer {
+  display: none;
+} */
+
+@media only screen and (max-width: 1024px) {
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+  }
+
+  .totop {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 704px) {
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
+
+}
+
+@media only screen and (max-width: 485px) {
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+  }
+
+  /* .foote {
+    display: block;
+  } */
 
 }

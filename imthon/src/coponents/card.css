@@ -1,0 +1,40 @@
+.icons{
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* background-color: transparent; */
+}
+
+.iframe{
+  width: 100%;
+  max-width: 1100px;
+}
+
+@media only screen and (max-width:1163px) {
+  
+  .iframe{
+    width: 100%;
+    max-width: 700px;
+    height: 400px;
+  }
+  
+}
+@media only screen and (max-width:773px) {
+  
+  .iframe{
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+  }
+  
+}
+
+@media only screen and (max-width:425px) {
+  
+  .iframe{
+    width: 100%;
+    max-width: 320px;
+    height: 200px;
+  }
+  
+}

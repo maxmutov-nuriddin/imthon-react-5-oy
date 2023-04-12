@@ -26,7 +26,7 @@ const Search = () => {
     <div>
       <SearchBar onSearch={handleSearch} />
       {searchResults.length > 0 ? (
-        <div>
+        <div> 
           <h2>Search Results:</h2>
           {searchResults.map((item) => (
             <Link to={`/card/${item.video.videoId}`}>

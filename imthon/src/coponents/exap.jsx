@@ -22,15 +22,14 @@ import { MdOutlineExpandMore } from 'react-icons/md';
 
 import "./examp.css"
 import 'swiper/css';
+import "swiper/css/grid";
+import "swiper/css/pagination"
 
 
 import { useContext } from "react"
 import { FetchContext } from "../context/Context";
 import { useState } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// import Video from './card';
 
 
 const NavScrollExample = ({ onSearch }) => {
@@ -41,15 +40,21 @@ const NavScrollExample = ({ onSearch }) => {
     onSearch(query);
   };
 
+  const filter = data.filter((value) => {
+    if (query === '') {
+      return value
+    }
+    else if (value.video.title.toLowerCase().includes(query.toLowerCase()) || value.video.author.title.toLowerCase().includes(query.toLowerCase())) {
+      return (value.video.title || value.video.author.title)
+    }
+
+  })
+
   return (
     <>
       <div className='container'>
-        <Navbar className='' bg="light" expand="lg">
-          <Container fluid>
-            <Button className='p-0 px-3 d-md-none d-lg-block' variant=""><svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" clipRule="evenodd" d="M18.6364 3H1.36364C0.61 3 0 2.328 0 1.5C0 0.672 0.61 0 1.36364 0H18.6364C19.3891 0 20 0.672 20 1.5C20 2.328 19.3891 3 18.6364 3ZM1.36364 7H18.6364C19.3891 7 20 7.672 20 8.5C20 9.328 19.3891 10 18.6364 10H1.36364C0.61 10 0 9.328 0 8.5C0 7.672 0.61 7 1.36364 7ZM18.6364 14H1.36364C0.61 14 0 14.672 0 15.5C0 16.328 0.61 17 1.36364 17H18.6364C19.3891 17 20 16.328 20 15.5C20 14.672 19.3891 14 18.6364 14Z" fill="#1F2022" />
-            </svg>
-            </Button>
+        <Navbar className='totop' bg="light" expand="lg">
+          <Container fluid className='d-flex justify-content-between'>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Brand href="#"><svg width="116" height="25" viewBox="0 0 116 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="7.94141" y="3.99878" width="21" height="17" fill="white" />
@@ -102,8 +107,8 @@ const NavScrollExample = ({ onSearch }) => {
 
 
 
-        <div className='row dv '>
-          <div className='col-2 ps-4 '>
+        <div className=' row dv'>
+          <div className='tofix d-none d-sm-block col-2 ps-4 '>
             <ul className=' flex-column'>
               <li className=''><NavLink className='li d-flex' to='/Home'><BsHouseDoor className='me-2' />Home</NavLink></li>
               <li className='my-3'><NavLink className='li d-flex' to="/Trending"><AiOutlineFire className='me-2' />Trending</NavLink></li>
@@ -118,7 +123,7 @@ const NavScrollExample = ({ onSearch }) => {
               <li className='my-3'><NavLink className='li d-flex' to="/Subscriptions"><CiMusicNote1 className='me-2' />Music</NavLink></li>
               <li className=''><NavLink className='li d-flex' to="/Subscriptions"><CgGames className='me-2' />Games</NavLink></li>
               <li className='dropdown'>
-                <button className="btn border border-0 li p-0 mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button className="btn border d-flex border-0 li p-0 mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <MdOutlineExpandMore className='me-2' />
                   Show more
                 </button>
@@ -138,103 +143,34 @@ const NavScrollExample = ({ onSearch }) => {
               <li className=' d-flex align-items-center'><div className='girl-si ful me-2'></div><NavLink className='li ' to="/Emma Hanson">Emma Hanson</NavLink></li>
               <li className='my-3 d-flex align-items-center'><div className='man ful me-2'></div><NavLink className='li ' to="/Leah Berry">Leah Berry</NavLink></li>
             </ul>
-            <div className='mt-5'><NavLink className='li d-flex align-items-center' to="/Setting"><CiSettings className='me-2'/>Setting</NavLink></div>
+            <div className='mt-5'><NavLink className='li d-flex align-items-center' to="/Setting"><CiSettings className='me-2' />Setting</NavLink></div>
           </div>
 
-          <div className='w-75 p-0 dw'>
-            <div className='d-flex align-items-center mb-3'>
-              <div className='sp-img__sec me-3'></div>
-              <h1 className='title'>
-                Dollie Blair
-              </h1>
-            </div>
-            <div className="row">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={5}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
-                {
-                  data.map((fetch, index) => (
-                    <SwiperSlide>
-                      <div className='' key={index}>
-                        <Link to={`/card/${fetch.video.videoId}`}>
-                          <img src={`${fetch.video.thumbnails[0].url}`} />
-                          {/* <iframe width="100%" height="200" src={`https://www.youtube.com/embed/${fetch.video.videoId}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe> */}
-                          <div className=" p-0">
-                            <h5 className="card-title fs-6 texts">{fetch.video.title}</h5>
-                          </div>
-                        </Link>
-                      </div>
-                    </SwiperSlide>
-                  ))
-                }
-              </Swiper>
-            </div>
-            <div>
-              <h1 className='titles'>
-                Recommended
-              </h1>
-            </div>
-            <div className="row">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={3}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
-                {
-                  data.map((fetch, index) => (
-                    <SwiperSlide>
+          <div className='pos w-75 p-0 dw'>
+            <div className="videos mt-5">
+              {
+                filter.map((fetch, index) => (
 
-                      <div className='' key={index}>
-                        <Link to={`/card/${fetch.video.videoId}`}>
-                          <img width="350" src={`${fetch.video.thumbnails[0].url}`} />
-                          {/* <iframe width="100%" height="200" src={`https://www.youtube.com/embed/${fetch.video.videoId}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe> */}
-                          <div className=" p-0">
-                            <h5 className="card-title fs-6 texts">{fetch.video.title}</h5>
-                          </div>
-                        </Link>
+                  <div className='' key={index}>
+                    <Link to={`/card/${fetch.video.videoId}`}>
+                      <img src={`${fetch.video.thumbnails[0].url}`} />
+                      <div className=" p-0">
+                        <h5 className="card-title fs-6 texts">{fetch.video.title}</h5>
                       </div>
-                    </SwiperSlide>
-                  ))
-                }
-              </Swiper>
-            </div>
-            <div className='d-flex align-items-center my-3'>
-              <div className='sp-img__fir me-3'></div>
-              <h1 className='titls'>
-                Food & Drink
-              </h1>
-            </div>
-            <div className="row">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={5}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
-                {
-                  data.map((fetch, index) => (
-                    <SwiperSlide>
-
-                      <div className='' key={index}>
-                        <Link to={`/card/${fetch.video.videoId}`}>
-                          <img src={`${fetch.video.thumbnails[0].url}`} />
-                          {/* <iframe width="100%" height="200" src={`https://www.youtube.com/embed/${fetch.video.videoId}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe> */}
-                          <div className=" p-0">
-                            <h5 className="card-title fs-6 texts">{fetch.video.title}</h5>
-                          </div>
-                        </Link>
-                      </div>
-                    </SwiperSlide>
-                  ))
-                }
-              </Swiper>
+                    </Link>
+                  </div>
+                ))
+              }
             </div>
           </div>
-
+          <div className='footer d-block d-sm-none'>
+            <ul className=' list__item my-5 d-flex align-items-center justify-content-center'>
+              <li className=''><NavLink className='li d-flex flex-column ' to='/Home'><BsHouseDoor className='mx-auto mb-2' />Home</NavLink></li>
+              <li className='mx-5'><NavLink className='li d-flex flex-column ' to="/Trending"><AiOutlineFire className='mx-auto mb-2' />Trending</NavLink></li>
+              <li className=''><NavLink className='li d-flex flex-column ' to="/Subscriptions"><BsFiles className='mx-auto mb-2' />Subscriptions</NavLink></li>
+              <li className='ms-5'><NavLink className='li d-flex flex-column ' to='/Library'><SlFolder className='mx-auto mb-2' />Library</NavLink></li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
