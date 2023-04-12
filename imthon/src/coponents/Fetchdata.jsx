@@ -1,15 +1,15 @@
-import { useContext } from "react"
-import { FetchContext } from "../context/Context";
+// import { useContext } from "react"
+// import { FetchContext } from "../context/Context";
 
-const Fetchdata = () => {
-  const { data } = useContext(FetchContext)
-  return (
-    <div>
-      <div>
+// const Fetchdata = () => {
+//   const { data } = useContext(FetchContext)
+//   return (
+//     <div>
+//       <div>
 
-      </div>
-    </div>
-  )
-}
+//       </div>
+//     </div>
+//   )
+// }
 
-export default Fetchdata
+// export default Fetchdata

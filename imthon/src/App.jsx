@@ -1,6 +1,5 @@
 import Card from "./coponents/card";
 import Exap from "./coponents/exap"
-import Footer from "./coponents/footer";
 
 
 
@@ -15,7 +14,6 @@ const App = () => {
         <Route path="/Home" element={<Exap />} />
         <Route path="/card/:id" element={<Card />} />
       </Routes>
-      <Footer />
     </>
   )
 }
