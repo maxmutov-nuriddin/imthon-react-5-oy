@@ -2,10 +2,8 @@ import { useContext, useState } from "react";
 import { FetchContext } from "../context/Context";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SearchBar from "./exap";
-import 'swiper/css';
+import 'swiper/css/swiper.css';
 import { Link } from "react-router-dom";
-
-
 
 const Search = () => {
   const { data } = useContext(FetchContext);
@@ -13,10 +11,10 @@ const Search = () => {
 
   const handleSearch = (query) => {
     const results = data.filter((item) => {
-      if (handleSearch === '') {
-        return value;
+      if (query === '') {
+        return item;
       } else if (item.video.title.toLowerCase().includes(query.toLowerCase())) {
-        return item
+        return item;
       }
     });
     setSearchResults(results);
@@ -26,11 +24,11 @@ const Search = () => {
     <div>
       <SearchBar onSearch={handleSearch} />
       {searchResults.length > 0 ? (
-        <div> 
-          <h2>Search Results:</h2>
+        <div>
+          <h2>Результаты поиска:</h2>
           {searchResults.map((item) => (
-            <Link to={`/card/${item.video.videoId}`}>
-              <div key={item.video.videoId}>
+            <Link to={`/card/${item.video.videoId}`} key={item.video.videoId}>
+              <div>
                 <h3>{item.video.title}</h3>
                 <img src={item.video.thumbnails[0].url} alt={item.video.title} />
               </div>
@@ -39,8 +37,7 @@ const Search = () => {
         </div>
 
       ) : (
-        <div>
-        </div>
+        <div></div>
       )}
     </div>
   );
