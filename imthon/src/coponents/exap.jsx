@@ -127,10 +127,10 @@ const NavScrollExample = ({ onSearch }) => {
                   <MdOutlineExpandMore className='me-2' />
                   Show more
                 </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
             </ul>
