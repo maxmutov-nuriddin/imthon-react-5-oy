@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { FetchContext } from "../context/Context";
 import { useContext, useState } from "react";
+// import { comments } from './comments'
 
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -28,6 +29,103 @@ import { AiOutlineDownload } from 'react-icons/ai';
 
 
 import './card.css'
+
+function CommentList({ comments, onDeleteComment, onEditComment }) {
+  return (
+    <div>
+      {comments.map((comment) => (
+        <CommentItem
+          key={comment.id}
+          comment={comment}
+          onDeleteComment={onDeleteComment}
+          onEditComment={onEditComment}
+        />
+      ))}
+    </div>
+  );
+}
+
+function CommentItem({ comment, onDeleteComment, onEditComment }) {
+  const [editing, setEditing] = useState(false);
+  const [newText, setNewText] = useState(comment.text);
+
+  const handleDeleteClick = () => {
+    onDeleteComment(comment.id);
+  };
+
+  const handleEditClick = () => {
+    setEditing(true);
+  };
+
+  const handleSaveClick = () => {
+    onEditComment(comment.id, newText);
+    setEditing(false);
+  };
+
+  const handleCancelClick = () => {
+    setNewText(comment.text);
+    setEditing(false);
+  };
+
+  const handleTextChange = (e) => {
+    setNewText(e.target.value);
+  };
+
+  if (editing) {
+    return (
+      <div className="d-flex justify-content-between me-xl-5 me-0">
+        <input className="mt-3" type="text" value={newText} onChange={handleTextChange} />
+        <div className="mt-3 flex-column flex-lg-row">
+          <button className="me-3 " onClick={handleSaveClick}>Сохранить</button>
+          <button onClick={handleCancelClick}>Отменить</button>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="d-flex justify-content-between me-xl-5 me-0">
+        <p className="mt-3">
+          {comment.author}: {comment.text}
+        </p>
+        <div className="mt-3 d-flex flex-column flex-lg-row">
+          <button className="me-3" onClick={handleEditClick}>Изменить</button>
+          <button onClick={handleDeleteClick}>Удалить</button>
+        </div>
+      </div>
+    );
+  }
+}
+
+function CommentForm({ onAddComment }) {
+  const [author, setAuthor] = useState("");
+  const [text, setText] = useState("");
+
+  const handleAuthorChange = (e) => {
+    setAuthor(e.target.value);
+  };
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newComment = { id: Date.now(), author, text };
+    onAddComment(newComment);
+    setAuthor("");
+    setText("");
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit} className="d-flex flex-lg-row flex-column justify-content-between me-xl-5 me-0 my-4">
+        <input type="text" value={author} onChange={handleAuthorChange} placeholder="Автор" />
+        <input type="text" value={text} onChange={handleTextChange} placeholder="Текст комментария" />
+        <button type="submit">Добавить комментарий</button>
+      </form>
+    </div>
+  );
+}
 
 const Video = ({ onSearch, subscribed, onSubscribeClick }) => {
 
@@ -124,10 +222,45 @@ const Video = ({ onSearch, subscribed, onSubscribeClick }) => {
     alert('Ссылка скопирована в буфер обмена!');
   };
 
+
+  // ===================================
+
+  const [comments, setComments] = useState([
+    { id: 1, author: "John", text: "Крутой пост!" },
+    { id: 2, author: "Jane", text: "Согласен с тобой!" },
+    { id: 3, author: "Bob", text: "Отличная статья!" },
+    { id: 4, author: "Bob", text: "Отличная статья!" },
+    { id: 5, author: "Bob", text: "Отличная статья!" },
+    { id: 6, author: "Bob", text: "Отличная статья!" },
+    { id: 7, author: "Bob", text: "Отличная статья!" },
+    { id: 8, author: "Bob", text: "Отличная статья!" }, 
+  ]);
+
+  const handleDeleteComment = (id) => {
+    const updatedComments = comments.filter((comment) => comment.id !== id);
+    setComments(updatedComments);
+  };
+
+  const handleEditComment = (id, newText) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === id) {
+        return { ...comment, text: newText };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+  };
+
+  const handleAddComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
+
+  // =================================
+
   return (
     <div className="container">
       <div className='row dv'>
-        <Navbar className='totop' bg="light" expand="lg">
+        <Navbar className='totop totops' bg="light" expand="lg">
           <Container fluid className='d-flex justify-content-between'>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Brand href="#"><svg width="116" height="25" viewBox="0 0 116 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,7 +270,7 @@ const Video = ({ onSearch, subscribed, onSubscribeClick }) => {
             </svg>
             </Navbar.Brand>
             <Navbar.Collapse id="navbarScroll">
-              <Form className="d-flex align-items-center me-auto my-2 my-lg-0 ">
+              <Form className="d-flex align-items-center mx-auto my-2 my-lg-0 ">
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -178,8 +311,8 @@ const Video = ({ onSearch, subscribed, onSubscribeClick }) => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <div className="show-data-wrapper">
-          <button onClick={handleButtonClick} className="button__burger">
+        <div className="show-data-wrapper fixed">
+          <button onClick={handleButtonClick} className="button__burger ">
             {isDataVisible ? <GiHamburgerMenu className="burger" /> : <GiHamburgerMenu className="burger" />}
           </button>
           {isDataVisible && (
@@ -283,6 +416,24 @@ const Video = ({ onSearch, subscribed, onSubscribeClick }) => {
                 </button>
               </div>
             </div>
+          </div>
+          <div className="description__box me-xl-5 me-0 px-3 py-2">
+            <strong className="description__population">524 млн просмотров  9 месяцев назад</strong>
+            {data.find(obj => obj.video.videoId === id) ? (
+              <p className="fs-7 my-1 description__name">{data.find(obj => obj.video.videoId === id).video.title}</p>
+            ) : (
+              <p>Видео с идентификатором {id} не найдено</p>
+            )}
+            <strong className="ps-3">Ещё</strong>
+          </div>
+          <div className="mt-3">
+            <h2>Комментарии</h2>
+            <CommentForm onAddComment={handleAddComment} />
+            <CommentList
+              comments={comments}
+              onDeleteComment={handleDeleteComment}
+              onEditComment={handleEditComment}
+            />
           </div>
         </div>
         <div className="col-lg-4 d-flex flex-column box__card">

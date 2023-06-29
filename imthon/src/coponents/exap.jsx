@@ -160,10 +160,10 @@ const NavScrollExample = ({ onSearch }) => {
           </div>
           <div className='footer d-block d-sm-none'>
             <ul className=' list__item my-5 d-flex align-items-center justify-content-center'>
-              <li className=''><NavLink className='li d-flex flex-column ' to='/Home'><BsHouseDoor className='mx-auto mb-2' />Home</NavLink></li>
-              <li className='mx-5'><NavLink className='li d-flex flex-column ' to="/Trending"><AiOutlineFire className='mx-auto mb-2' />Trending</NavLink></li>
-              <li className=''><NavLink className='li d-flex flex-column ' to="/Subscriptions"><BsFiles className='mx-auto mb-2' />Subscriptions</NavLink></li>
-              <li className='ms-5'><NavLink className='li d-flex flex-column ' to='/Library'><SlFolder className='mx-auto mb-2' />Library</NavLink></li>
+              <li className=''><NavLink className='li d-flex flex-column ' to='#'><BsHouseDoor className='mx-auto mb-2' />Home</NavLink></li>
+              <li className='mx-5'><NavLink className='li d-flex flex-column ' to="https://www.youtube.com/results?search_query=trending"><AiOutlineFire className='mx-auto mb-2' />Trending</NavLink></li>
+              <li className=''><NavLink className='li d-flex flex-column ' to="https://www.youtube.com/feed/subscriptions"><BsFiles className='mx-auto mb-2' />Subscriptions</NavLink></li>
+              <li className='ms-5'><NavLink className='li d-flex flex-column ' to='https://www.youtube.com/feed/library'><SlFolder className='mx-auto mb-2' />Library</NavLink></li>
             </ul>
           </div>
         </div>
